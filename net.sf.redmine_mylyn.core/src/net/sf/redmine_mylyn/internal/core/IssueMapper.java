@@ -149,7 +149,21 @@ public class IssueMapper {
 		setTaskKind(issue, cfg, root);
 		
 
+		setTaskKey(issue, root);
 		
+		
+	}
+
+	private static void setTaskKey(Issue issue, TaskAttribute task) {
+		TaskAttribute key = task.getAttribute(TaskAttribute.TASK_KEY);
+		if (key==null) {
+			key = task.createAttribute(TaskAttribute.TASK_KEY); 
+		}
+		if (issue.getParentId()>0) {
+			key.setValue("#" + issue.getParentId() + " #" + issue.getId());
+		} else {
+			key.setValue("#" + issue.getId());
+		}
 		
 	}
 
@@ -240,6 +254,7 @@ public class IssueMapper {
 		
 		setTaskKind(issue, cfg, root);
 		
+		setTaskKey(issue, root);
 		
 		return issue;
 	}
