@@ -328,6 +328,7 @@ public class IssueMapper {
 			switch(field.getFieldFormat()) {
 			case DATE: value = value.isEmpty() ? "" : RedmineUtil.formatDate(RedmineUtil.parseDate(value)); break; //$NON-NLS-1$
 			case BOOL: value = Boolean.parseBoolean(value) ? IRedmineConstants.BOOLEAN_TRUE_SUBMIT_VALUE : IRedmineConstants.BOOLEAN_FALSE_SUBMIT_VALUE;
+			default: return value;
 			}
 		}
 		return value;
@@ -406,7 +407,7 @@ public class IssueMapper {
 					case PROGRESS:field.setInt(issue, taskAttribute.getValue().isEmpty() ? 0 : Integer.parseInt(taskAttribute.getValue())); break;
 					case ESTIMATED:
 						if (!taskAttribute.getValue().isEmpty())
-							field.setFloat(issue, Float.parseFloat(taskAttribute.getValue()));
+							field.set(issue, new Float(taskAttribute.getValue()));
 						break;
 					default:
 						if(redmineAttribute.getType().equals(TaskAttribute.TYPE_SINGLE_SELECT) || redmineAttribute.getType().equals(TaskAttribute.TYPE_PERSON) || redmineAttribute.getType().equals(IRedmineConstants.EDITOR_TYPE_PERSON) || redmineAttribute==RedmineAttribute.PARENT) {

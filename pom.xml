@@ -26,7 +26,7 @@
 	</modules>
 
 	<properties>
-		<tycho-version>0.16.0</tycho-version>
+		<tycho-version>0.20.0</tycho-version>
 		<platform-version-name>indigo</platform-version-name>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<eclipse-site>http://download.eclipse.org/releases/${platform-version-name}</eclipse-site>
@@ -153,6 +153,19 @@
 			<properties>
 				<eclipse-site>http://download.eclipse.org/releases/kepler</eclipse-site>
 				<platform-version>[4.3,4.4)</platform-version>
+			</properties>
+		</profile>
+		<profile>
+			<id>platform-luna</id>
+			<activation>
+				<property>
+					<name>platform-version-name</name>
+					<value>luna</value>
+				</property>
+			</activation>
+			<properties>
+				<eclipse-site>http://download.eclipse.org/releases/luna</eclipse-site>
+				<platform-version>[4.4,4.5)</platform-version>
 			</properties>
 		</profile>
 	</profiles>
